@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>卡包计算器</title>
+    <style>
+      body {
+        width: 380px;
+        margin: 0;
+        padding: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #f5f6fa;
+      }
+      .container {
+        background: white;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        margin: 0 0 20px 0;
+        color: #2c3e50;
+        font-size: 20px;
+        text-align: center;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #34495e;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      input, select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #e1e8ed;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #2c3e50;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+      input:focus, select:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      input::placeholder {
+        color: #95a5a6;
+      }
+      button {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
+      }
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+      }
+      button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
+      }
+      #result {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #e67e22;
+      }
+      #result h3 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+        font-size: 16px;
+        text-align: center;
+      }
+      #result p {
+        margin: 0;
+        color: #34495e;
+        font-size: 14px;
+      }
+      .input-prefix {
+        position: relative;
+      }
+      .input-prefix input {
+        padding-left: 30px;
+      }
+      .input-prefix::before {
+        content: "¥";
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #95a5a6;
+        font-size: 14px;
+      }
+      .actual-price {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #7f8c8d;
+        padding-left: 2px;
+      }
+      
+      .actual-price-label {
+        color: #95a5a6;
+      }
+      
+      .actual-price-value {
+        color: #e67e22;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+      .radio-group {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 5px;
+      }
+      
+      .radio-item {
+        position: relative;
+      }
+      
+      .radio-item input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      
+      .radio-item label {
+        display: block;
+        padding: 8px 12px;
+        background: #f8f9fa;
+        border: 2px solid #e1e8ed;
+        border-radius: 6px;
+        color: #2c3e50;
+        font-size: 13px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .radio-item input[type="radio"]:checked + label {
+        background: #3498db;
+        border-color: #3498db;
+        color: white;
+      }
+      
+      .radio-item input[type="radio"]:focus + label {
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .radio-item label:hover {
+        border-color: #3498db;
+      }
+      
+      .result-value {
+        text-align: center;
+        padding: 10px 0;
+      }
+      
+      .result-label {
+        font-size: 16px;
+        color: #2c3e50;
+      }
+      
+      .result-number {
+        font-size: 24px;
+        font-weight: 600;
+        color: #e67e22;
+        margin-left: 8px;
+      }
+      
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      
+      .clear-input {
+        position: absolute;
+        right: 10px;
+        color: #95a5a6;
+        cursor: pointer;
+        padding: 4px;
+        font-size: 14px;
+        display: none;
+      }
+      
+      .input-wrapper:hover .clear-input {
+        display: block;
+      }
+      
+      .clear-input:hover {
+        color: #e74c3c;
+      }
+      
+      .input-wrapper input {
+        padding-right: 30px;
+      }
+      .discount-rate {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #7f8c8d;
+        padding-left: 2px;
+      }
+      
+      .discount-rate-label {
+        color: #95a5a6;
+      }
+      
+      .discount-rate-value {
+        color: #e67e22;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>卡包计算器</h2>
+      <div class="input-group">
+        <label>卡片数量</label>
+        <div class="radio-group">
+          <div class="radio-item">
+            <input type="radio" id="card5" name="cardCount" value="1200">
+            <label for="card5">5张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card6" name="cardCount" value="1000">
+            <label for="card6">6张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card7" name="cardCount" value="857">
+            <label for="card7">7张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card8" name="cardCount" value="750">
+            <label for="card8">8张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card9" name="cardCount" value="667">
+            <label for="card9">9张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card10" name="cardCount" value="600">
+            <label for="card10">10张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card11" name="cardCount" value="545">
+            <label for="card11">11张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card12" name="cardCount" value="500">
+            <label for="card12">12张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card13" name="cardCount" value="462">
+            <label for="card13">13张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card14" name="cardCount" value="429">
+            <label for="card14">14张</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card15" name="cardCount" value="400">
+            <label for="card15">15张</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="gemPrice">宝石市场价格（元）</label>
+        <div class="input-prefix input-wrapper">
+          <input type="number" 
+                 id="gemPrice" 
+                 step="0.01"
+                 placeholder="请输入宝石市场价格" />
+          <select id="gemPriceSelect" 
+                  style="position: absolute; right: 25px; width: auto; padding: 2px; border: none; background: transparent; cursor: pointer;">
+            <option value="">快速选择</option>
+          </select>
+          <span class="clear-input" data-for="gemPrice">✕</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="packPrice">补充包市场价格（元）</label>
+        <div class="input-prefix input-wrapper">
+          <input type="number" 
+                 id="packPrice" 
+                 step="0.01"
+                 placeholder="请输入补充包市场价格" />
+          <select id="packPriceSelect" 
+                  style="position: absolute; right: 25px; width: auto; padding: 2px; border: none; background: transparent; cursor: pointer;">
+            <option value="">快速选择</option>
+          </select>
+          <span class="clear-input" data-for="packPrice">✕</span>
+        </div>
+        <div class="actual-price">
+          <span class="actual-price-label">到手价格：</span>
+          <span id="actualPrice" class="actual-price-value">¥0.00元</span>
+        </div>
+        <div class="discount-rate">
+          <span class="discount-rate-label">宝石折扣率：</span>
+          <span id="discountRate" class="discount-rate-value">0%</span>
+        </div>
+      </div>
+      <div id="result" style="display: none;"></div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html> 
