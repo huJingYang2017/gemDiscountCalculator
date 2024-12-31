@@ -1,17 +1,17 @@
 function initializePriceSelects() {
   // 初始化宝石价格下拉菜单
-  const gemSelect = document.getElementById('gemPriceSelect');
-  for(let i = 190; i <= 210; i++) {
-    const option = document.createElement('option');
+  const gemSelect = document.getElementById("gemPriceSelect");
+  for (let i = 190; i <= 210; i++) {
+    const option = document.createElement("option");
     option.value = (i / 100).toFixed(2);
     option.textContent = `¥${(i / 100).toFixed(2)}`;
     gemSelect.appendChild(option);
   }
 
   // 初始化补充包价格下拉菜单
-  const packSelect = document.getElementById('packPriceSelect');
-  for(let i = 242; i <= 270; i++) {
-    const option = document.createElement('option');
+  const packSelect = document.getElementById("packPriceSelect");
+  for (let i = 242; i <= 270; i++) {
+    const option = document.createElement("option");
     option.value = (i / 100).toFixed(2);
     option.textContent = `¥${(i / 100).toFixed(2)}`;
     packSelect.appendChild(option);
@@ -85,18 +85,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 从存储中恢复数据
   if (!chrome?.storage?.local) {
-    console.error('Chrome storage API not available');
+    console.error("Chrome storage API not available");
     return;
   }
 
-  chrome.storage.local.get(['cardCount', 'gemPrice', 'packPrice'], (result) => {
+  chrome.storage.local.get(["cardCount", "gemPrice", "packPrice"], (result) => {
     const error = chrome.runtime.lastError;
     if (error) {
-      console.error('Error restoring data:', error);
+      console.error("Error restoring data:", error);
       return;
     }
 
-    console.log('Retrieved data:', result);
+    console.log("Retrieved data:", result);
 
     if (result.cardCount) {
       const radio = document.querySelector(
@@ -151,23 +151,26 @@ function updateActualPrice(marketPrice) {
 // 修改存储工具函数
 function saveToStorage(data) {
   if (!chrome?.storage?.local) {
-    console.error('Chrome storage API not available');
+    console.error("Chrome storage API not available");
     return;
   }
 
   chrome.storage.local.set(data, () => {
     const error = chrome.runtime.lastError;
     if (error) {
-      console.error('Storage error:', error);
+      console.error("Storage error:", error);
     } else {
-      console.log('Data saved successfully:', data);
+      console.log("Data saved successfully:", data);
     }
   });
 }
 
 // 自动计算函数
 function autoCalculate() {
-  const cardCount = parseFloat(document.querySelector('input[name="cardCount"]:checked')?.value) || 0;
+  const cardCount =
+    parseFloat(
+      document.querySelector('input[name="cardCount"]:checked')?.value
+    ) || 0;
   const gemPrice = parseFloat(document.getElementById("gemPrice").value) || 0;
   const packPrice = parseFloat(document.getElementById("packPrice").value) || 0;
 
@@ -181,28 +184,47 @@ function autoCalculate() {
   saveToStorage({
     cardCount: cardCount,
     gemPrice: gemPrice,
-    packPrice: packPrice
+    packPrice: packPrice,
   });
 
   // 计算性价比
   const total = ((gemPrice * (cardCount / 1000)) / (packPrice / 1.15)) * 100;
 
-  showResult(`
-    <h3>计算结果</h3>
+  // 直接显示折扣值
+  showResult(total);
+
+  calculateGemCost();
+}
+
+function showResult(total) {
+  const resultDiv = document.getElementById("result");
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = `
     <div class="result-value">
       <span class="result-label">性价比折扣：</span>
       <span class="result-number">${total.toFixed(2)}折</span>
     </div>
-  `);
-}
-
-function showResult(html) {
-  const resultDiv = document.getElementById("result");
-  resultDiv.style.display = "block";
-  resultDiv.innerHTML = html;
+  `;
 }
 
 function hideResult() {
   const resultDiv = document.getElementById("result");
   resultDiv.style.display = "none";
 }
+
+function calculateGemCost() {
+  const gemPrice = parseFloat(document.getElementById("gemPrice").value) || 0;
+  const cardCount =
+    parseFloat(
+      document.querySelector('input[name="cardCount"]:checked')?.value
+    ) || 0;
+
+  const gemCost = (gemPrice / 0.8) * (cardCount / 1000);
+  document.getElementById("gemCost").textContent = `¥${gemCost.toFixed(2)}元`;
+}
+
+// 在适当的事件中调用 calculateGemCost，例如在输入框或单选框变化时
+document.getElementById("gemPrice").addEventListener("input", calculateGemCost);
+document.querySelectorAll('input[name="cardCount"]').forEach((input) => {
+  input.addEventListener("change", calculateGemCost);
+});

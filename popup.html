@@ -36,6 +36,7 @@
         color: #34495e;
         font-size: 14px;
         font-weight: 500;
+        overflow: hidden;
       }
       input, select {
         width: 100%;
@@ -250,6 +251,21 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #a8a8a8;
       }
+      .gem-cost {
+        font-size: 13px;
+        font-weight: normal;
+        color: #7f8c8d;
+      }
+      
+      .gem-cost-label {
+        color: #95a5a6;
+      }
+      
+      .gem-cost-value {
+        color: #e67e22;
+        font-weight: 500;
+        margin-left: 4px;
+      }
     </style>
   </head>
   <body>
@@ -305,12 +321,18 @@
         </div>
       </div>
       <div class="input-group">
-        <label for="gemPrice">宝石市场价格（元）</label>
+        <label for="gemPrice">
+          宝石市场价格（元）
+          <span class="gem-cost">
+            <span class="gem-cost-label">宝石成本：</span>
+            <span id="gemCost" class="gem-cost-value">¥0.00元</span>
+          </span>
+        </label>
         <div class="input-prefix input-wrapper">
           <input type="number" 
                  id="gemPrice" 
                  step="0.01"
-                 placeholder="请输入宝石市���价格" />
+                 placeholder="请输入宝石市场价格" />
           <select id="gemPriceSelect" 
                   style="position: absolute; right: 25px; width: auto; padding: 2px; border: none; background: transparent; cursor: pointer;">
             <option value="">快速选择</option>
@@ -319,7 +341,13 @@
         </div>
       </div>
       <div class="input-group">
-        <label for="packPrice">补充包市场价格（元）</label>
+        <label for="packPrice">
+          补充包市场价格（元）
+          <span class="actual-price">
+            <span class="actual-price-label">到手价格：</span>
+            <span id="actualPrice" class="actual-price-value">¥0.00元</span>
+          </span>
+        </label>
         <div class="input-prefix input-wrapper">
           <input type="number" 
                  id="packPrice" 
@@ -330,10 +358,6 @@
             <option value="">快速选择</option>
           </select>
           <span class="clear-input" data-for="packPrice">✕</span>
-        </div>
-        <div class="actual-price">
-          <span class="actual-price-label">到手价格：</span>
-          <span id="actualPrice" class="actual-price-value">¥0.00元</span>
         </div>
         <div class="discount-rate">
           <span class="discount-rate-label">宝石折扣率：</span>
