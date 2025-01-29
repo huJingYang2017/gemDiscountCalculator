@@ -219,7 +219,7 @@ function calculateGemCost() {
       document.querySelector('input[name="cardCount"]:checked')?.value
     ) || 0;
 
-  const gemCost = (gemPrice / 0.8) * (cardCount / 1000);
+  const gemCost = (gemPrice) * (cardCount / 1000);
   document.getElementById("gemCost").textContent = `¥${gemCost.toFixed(2)}元`;
 }
 
