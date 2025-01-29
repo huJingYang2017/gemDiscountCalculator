@@ -319,6 +319,46 @@
         text-decoration: line-through;
         color: #e74c3c;
       }
+
+      .profit {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #7f8c8d;
+      }
+
+      .profit-label {
+        color: #95a5a6;
+      }
+
+      .profit-value {
+        color: #e67e22;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+
+      .discount-profit-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+
+      .discount-rate,
+      .profit {
+        font-size: 13px;
+        color: #7f8c8d;
+      }
+
+      .discount-rate-label,
+      .profit-label {
+        color: #95a5a6;
+      }
+
+      .discount-rate-value,
+      .profit-value {
+        color: #e67e22;
+        font-weight: 500;
+        margin-left: 4px;
+      }
     </style>
   </head>
   <body>
@@ -446,9 +486,15 @@
           </select>
           <span class="clear-input" data-for="packPrice">✕</span>
         </div>
-        <div class="discount-rate">
-          <span class="discount-rate-label">宝石折扣率：</span>
-          <span id="discountRate" class="discount-rate-value">0%</span>
+        <div class="discount-profit-container">
+          <div class="discount-rate">
+            <span class="discount-rate-label">宝石折扣率：</span>
+            <span id="discountRate" class="discount-rate-value">0%</span>
+          </div>
+          <div class="profit">
+            <span class="profit-label">利润：</span>
+            <span id="profitValue" class="profit-value">¥0.00元</span>
+          </div>
         </div>
       </div>
       <div id="result" style="display: none"></div>

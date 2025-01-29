@@ -118,6 +118,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (result.cardCount && result.gemPrice && result.packPrice) {
       updateDiscountRate();
       autoCalculate();
+
+      calculateGemCost(); // 在页面加载时计算宝石成本
+      calculateProfit(); // 计算利润
     }
   });
 });
@@ -165,6 +168,44 @@ function saveToStorage(data) {
   });
 }
 
+// 添加计算利润的函数
+function calculateProfit() {
+  const actualPrice =
+    parseFloat(
+      document
+        .getElementById("actualPrice")
+        .textContent.replace("¥", "")
+        .replace("元", "")
+    ) || 0;
+  const gemCost =
+    parseFloat(
+      document
+        .getElementById("gemCost")
+        .textContent.replace("¥", "")
+        .replace("元", "")
+    ) || 0;
+
+  const cardCount =
+    parseFloat(
+      document.querySelector('input[name="cardCount"]:checked')?.value
+    ) || 0;
+  const profit = (actualPrice - gemCost) * (cardCount / 1000);
+  document.getElementById("profitValue").textContent = `¥${profit.toFixed(
+    2
+  )}元`;
+}
+
+// 在适当的事件中调用 calculateProfit，例如在输入框或单选框变化时
+document.getElementById("packPrice").addEventListener("input", function () {
+  updateActualPrice(this.value);
+  calculateProfit(); // 计算利润
+});
+
+document.getElementById("gemPrice").addEventListener("input", calculateProfit);
+document.querySelectorAll('input[name="cardCount"]').forEach((input) => {
+  input.addEventListener("change", calculateProfit);
+});
+
 // 自动计算函数
 function autoCalculate() {
   const cardCount =
@@ -193,7 +234,8 @@ function autoCalculate() {
   // 直接显示折扣值
   showResult(total);
 
-  calculateGemCost();
+  // 计算利润
+  calculateProfit();
 }
 
 function showResult(total) {
@@ -219,7 +261,7 @@ function calculateGemCost() {
       document.querySelector('input[name="cardCount"]:checked')?.value
     ) || 0;
 
-  const gemCost = (gemPrice) * (cardCount / 1000);
+  const gemCost = gemPrice * (cardCount / 1000);
   document.getElementById("gemCost").textContent = `¥${gemCost.toFixed(2)}元`;
 }
 
