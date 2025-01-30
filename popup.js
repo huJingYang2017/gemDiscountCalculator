@@ -189,7 +189,7 @@ function calculateProfit() {
     parseFloat(
       document.querySelector('input[name="cardCount"]:checked')?.value
     ) || 0;
-  const profit = (actualPrice - gemCost) * (cardCount / 1000);
+  const profit = actualPrice - gemCost;
   document.getElementById("profitValue").textContent = `¥${profit.toFixed(
     2
   )}元`;
