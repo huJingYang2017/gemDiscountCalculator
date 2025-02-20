@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>卡包计算器</title>
-  <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>卡包计算器</title>
+    <style>
     body {
       width: 520px;
       margin: 0;
@@ -384,72 +384,75 @@
       margin-left: 4px;
     }
   </style>
-</head>
+  </head>
 
-<body>
-  <div class="container">
-    <h2>卡包计算器</h2>
-    <div class="input-group">
-      <label>卡片数量</label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" id="card5" name="cardCount" value="1200" />
-          <label for="card5">5张（1200）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card6" name="cardCount" value="1000" />
-          <label for="card6">6张（1000）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card7" name="cardCount" value="857" />
-          <label for="card7">7张（857）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card8" name="cardCount" value="750" />
-          <label for="card8">8张（750）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card9" name="cardCount" value="667" />
-          <label for="card9">9张（667）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card10" name="cardCount" value="600" />
-          <label for="card10">10张（600）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card11" name="cardCount" value="545" />
-          <label for="card11">11张（545）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card12" name="cardCount" value="500" />
-          <label for="card12">12张（500）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card13" name="cardCount" value="462" />
-          <label for="card13">13张（462）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card14" name="cardCount" value="429" />
-          <label for="card14">14张（429）</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="card15" name="cardCount" value="400" />
-          <label for="card15">15张（400）</label>
+  <body>
+    <div class="container">
+      <h2>卡包计算器</h2>
+      <div class="input-group">
+        <label>卡片数量</label>
+        <div class="radio-group">
+          <div class="radio-item">
+            <input type="radio" id="card5" name="cardCount" value="1200" />
+            <label for="card5">5张（1200）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card6" name="cardCount" value="1000" />
+            <label for="card6">6张（1000）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card7" name="cardCount" value="857" />
+            <label for="card7">7张（857）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card8" name="cardCount" value="750" />
+            <label for="card8">8张（750）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card9" name="cardCount" value="667" />
+            <label for="card9">9张（667）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card10" name="cardCount" value="600" />
+            <label for="card10">10张（600）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card11" name="cardCount" value="545" />
+            <label for="card11">11张（545）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card12" name="cardCount" value="500" />
+            <label for="card12">12张（500）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card13" name="cardCount" value="462" />
+            <label for="card13">13张（462）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card14" name="cardCount" value="429" />
+            <label for="card14">14张（429）</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="card15" name="cardCount" value="400" />
+            <label for="card15">15张（400）</label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="input-group">
-      <label for="gemPrice">
-        <a href="https://steamcommunity.com/market/listings/753/753-Sack%20of%20Gems" target="_blank"
-          class="market-link">宝石市场价格（元）</a>
-        <span class="gem-cost">
-          <span class="gem-cost-label">宝石成本：</span>
-          <span id="gemCost" class="gem-cost-value">¥0.00元</span>
-        </span>
-      </label>
-      <div class="input-prefix input-wrapper">
-        <input type="number" id="gemPrice" step="0.01" placeholder="请输入宝石市场价格" />
-        <select id="gemPriceSelect" style="
+      <div class="input-group">
+        <label for="gemPrice">
+          <a
+            href="https://steamcommunity.com/market/listings/753/753-Sack%20of%20Gems"
+            target="_blank"
+            class="market-link">宝石市场价格（元）</a>
+          <span class="gem-cost">
+            <span class="gem-cost-label">宝石成本：</span>
+            <span id="gemCost" class="gem-cost-value">¥0.00元</span>
+          </span>
+        </label>
+        <div class="input-prefix input-wrapper">
+          <input type="number" id="gemPrice" step="0.01"
+            placeholder="请输入宝石市场价格" />
+          <select id="gemPriceSelect" style="
               position: absolute;
               right: 25px;
               width: auto;
@@ -458,23 +461,25 @@
               background: transparent;
               cursor: pointer;
             ">
-          <option value="">快速选择</option>
-        </select>
-        <span class="clear-input" data-for="gemPrice">✕</span>
+            <option value>快速选择</option>
+          </select>
+          <span class="clear-input" data-for="gemPrice">✕</span>
+        </div>
       </div>
-    </div>
-    <div class="input-group">
-      <label for="packPrice">
-        <a href="https://steamcommunity.com/tradingcards/boostercreator" target="_blank"
-          class="market-link">补充包市场价格（元）</a>
-        <span class="actual-price">
-          <span class="actual-price-label">到手价格：</span>
-          <span id="actualPrice" class="actual-price-value">¥0.00元</span>
-        </span>
-      </label>
-      <div class="input-prefix input-wrapper">
-        <input type="number" id="packPrice" step="0.01" placeholder="请输入补充包市场价格" />
-        <select id="packPriceSelect" style="
+      <div class="input-group">
+        <label for="packPrice">
+          <a href="https://steamcommunity.com/tradingcards/boostercreator"
+            target="_blank"
+            class="market-link">补充包市场价格（元）</a>
+          <span class="actual-price">
+            <span class="actual-price-label">到手价格：</span>
+            <span id="actualPrice" class="actual-price-value">¥0.00元</span>
+          </span>
+        </label>
+        <div class="input-prefix input-wrapper">
+          <input type="number" id="packPrice" step="0.01"
+            placeholder="请输入补充包市场价格" />
+          <select id="packPriceSelect" style="
               position: absolute;
               right: 25px;
               width: auto;
@@ -483,56 +488,70 @@
               background: transparent;
               cursor: pointer;
             ">
-          <option value="">快速选择</option>
-        </select>
-        <span class="clear-input" data-for="packPrice">✕</span>
-      </div>
-      <div class="discount-profit-container">
-        <div class="discount-rate">
-          <span class="discount-rate-label">宝石折扣率：</span>
-          <span id="discountRate" class="discount-rate-value">0%</span>
+            <option value>快速选择</option>
+          </select>
+          <span class="clear-input" data-for="packPrice">✕</span>
         </div>
-        <div class="profit">
-          <span class="profit-label">利润：</span>
-          <span id="profitValue" class="profit-value">¥0.00元</span>
+        <div class="discount-profit-container">
+          <div class="discount-rate">
+            <span class="discount-rate-label">宝石折扣率：</span>
+            <span id="discountRate" class="discount-rate-value">0%</span>
+          </div>
+          <div class="profit">
+            <span class="profit-label">利润：</span>
+            <span id="profitValue" class="profit-value">¥0.00元</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="result" style="display: none"></div>
-    <div class="popular-packs">
-      <h3 class="section-title">热门补充包</h3>
-      <div class="pack-links">
-        <a
-          href="https://steamcommunity.com/market/listings/753/2457220-Avowed%20Booster%20Pack"
-          target="_blank"
-          class="pack-link strike-through"
-          >Avowed 补充包</a
-        >
-        <a href="https://steamcommunity.com/market/listings/753/1771300-Kingdom%20Come%3A%20Deliverance%20II%20Booster%20Pack"
-          target="_blank" class="pack-link">Kingdom Come: Deliverance II 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/2909400-FINAL%20FANTASY%20VII%20REBIRTH%20Booster%20Pack"
-          target="_blank" class="pack-link">最终幻想7重生 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/1643320-S.T.A.L.K.E.R.%202%3A%20Heart%20of%20Chornobyl%20Booster%20Pack"
-          target="_blank" class="pack-link">潜行者2：切尔诺贝利之心 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/2384580-DYNASTY%20WARRIORS%3A%20ORIGINS%20Booster%20Pack"
-          target="_blank" class="pack-link">真三国无双起源 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/1687950-Persona%205%20Royal%20Booster%20Pack"
-          target="_blank" class="pack-link strike-through">Persona 5 Royal 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/2358720-Black%20Myth%3A%20Wukong%20Booster%20Pack"
-          target="_blank" class="pack-link strike-through">Black Myth: Wukong 补充包</a>
+      <div id="result" style="display: none"></div>
+      <div class="popular-packs">
+        <h3 class="section-title">热门补充包</h3>
+        <div class="pack-links">
+          <a
+            href="https://steamcommunity.com/market/listings/753/3061810-Like%20a%20Dragon%3A%20Pirate%20Yakuza%20in%20Hawaii%20Booster%20Pack"
+            target="_blank"
+            class="pack-link ">Like a Dragon: Pirate Yakuza in Hawaii补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/1771300-Kingdom%20Come%3A%20Deliverance%20II%20Booster%20Pack"
+            target="_blank" class="pack-link">Kingdom Come: Deliverance II
+            补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2909400-FINAL%20FANTASY%20VII%20REBIRTH%20Booster%20Pack"
+            target="_blank" class="pack-link">最终幻想7重生 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/1643320-S.T.A.L.K.E.R.%202%3A%20Heart%20of%20Chornobyl%20Booster%20Pack"
+            target="_blank" class="pack-link">潜行者2：切尔诺贝利之心 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2384580-DYNASTY%20WARRIORS%3A%20ORIGINS%20Booster%20Pack"
+            target="_blank" class="pack-link">真三国无双起源 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/1687950-Persona%205%20Royal%20Booster%20Pack"
+            target="_blank" class="pack-link strike-through">Persona 5 Royal
+            补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2358720-Black%20Myth%3A%20Wukong%20Booster%20Pack"
+            target="_blank" class="pack-link strike-through">Black Myth: Wukong
+            补充包</a>
 
-        <a href="https://steamcommunity.com/market/listings/753/2677660-Indiana%20Jones%20and%20the%20Great%20Circle%20Booster%20Pack"
-          target="_blank" class="pack-link strike-through">夺宝奇兵：古老之圈 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/2420110-Horizon%20Forbidden%20West%E2%84%A2%20Complete%20Edition%20Booster%20Pack"
-          target="_blank" class="pack-link strike-through">Horizon Forbidden West 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/1340990-Rise%20of%20the%20Ronin%20Booster%20Pack" target="_blank"
-          class="pack-link strike-through">浪人崛起Rise of the Ronin 补充包</a>
-        <a href="https://steamcommunity.com/market/listings/753/2457220-Avowed%20Booster%20Pack" target="_blank"
-          class="pack-link strike-through">Avowed 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2677660-Indiana%20Jones%20and%20the%20Great%20Circle%20Booster%20Pack"
+            target="_blank" class="pack-link strike-through">夺宝奇兵：古老之圈 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2420110-Horizon%20Forbidden%20West%E2%84%A2%20Complete%20Edition%20Booster%20Pack"
+            target="_blank" class="pack-link strike-through">Horizon Forbidden
+            West 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/1340990-Rise%20of%20the%20Ronin%20Booster%20Pack"
+            target="_blank"
+            class="pack-link strike-through">浪人崛起Rise of the Ronin 补充包</a>
+          <a
+            href="https://steamcommunity.com/market/listings/753/2457220-Avowed%20Booster%20Pack"
+            target="_blank"
+            class="pack-link strike-through">Avowed 补充包</a>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="popup.js"></script>
-</body>
+    <script src="popup.js"></script>
+  </body>
 
 </html>
