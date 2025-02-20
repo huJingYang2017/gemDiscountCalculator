@@ -1,564 +1,538 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>卡包计算器</title>
-    <style>
-      body {
-        width: 520px;
-        margin: 0;
-        padding: 15px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: #f5f6fa;
-        max-height: 600px;
-        overflow-y: auto;
-      }
-      .container {
-        background: white;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      h2 {
-        margin: 0 0 20px 0;
-        color: #2c3e50;
-        font-size: 20px;
-        text-align: center;
-      }
-      .input-group {
-        margin-bottom: 20px;
-      }
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: #34495e;
-        font-size: 14px;
-        font-weight: 500;
-        overflow: hidden;
-      }
-      input,
-      select {
-        width: 100%;
-        padding: 10px;
-        border: 2px solid #e1e8ed;
-        border-radius: 8px;
-        font-size: 14px;
-        color: #2c3e50;
-        background: #fff;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-      }
-      input:focus,
-      select:focus {
-        outline: none;
-        border-color: #3498db;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-      }
-      input::placeholder {
-        color: #95a5a6;
-      }
-      button {
-        background: linear-gradient(135deg, #3498db, #2980b9);
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 15px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
-      }
-      button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
-      }
-      button:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
-      }
-      #result {
-        margin-top: 20px;
-        padding: 15px;
-        background: #f8f9fa;
-        border-radius: 8px;
-        border-left: 4px solid #e67e22;
-      }
-      #result h3 {
-        margin: 0 0 10px 0;
-        color: #2c3e50;
-        font-size: 16px;
-        text-align: center;
-      }
-      #result p {
-        margin: 0;
-        color: #34495e;
-        font-size: 14px;
-      }
-      .input-prefix {
-        position: relative;
-      }
-      .input-prefix input {
-        padding-left: 30px;
-      }
-      .input-prefix::before {
-        content: "¥";
-        position: absolute;
-        left: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #95a5a6;
-        font-size: 14px;
-      }
-      .actual-price {
-        margin-top: 8px;
-        font-size: 13px;
-        color: #7f8c8d;
-        padding-left: 2px;
-      }
 
-      .actual-price-label {
-        color: #95a5a6;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>卡包计算器</title>
+  <style>
+    body {
+      width: 520px;
+      margin: 0;
+      padding: 15px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f6fa;
+      max-height: 600px;
+      overflow-y: auto;
+    }
 
-      .actual-price-value {
-        color: #e67e22;
-        font-weight: 500;
-        margin-left: 4px;
-      }
-      .radio-group {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        margin-top: 5px;
-      }
+    .container {
+      background: white;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-      .radio-item {
-        position: relative;
-      }
+    h2 {
+      margin: 0 0 20px 0;
+      color: #2c3e50;
+      font-size: 20px;
+      text-align: center;
+    }
 
-      .radio-item input[type="radio"] {
-        position: absolute;
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
+    .input-group {
+      margin-bottom: 20px;
+    }
 
-      .radio-item label {
-        display: block;
-        padding: 8px 12px;
-        background: #f8f9fa;
-        border: 2px solid #e1e8ed;
-        border-radius: 6px;
-        color: #2c3e50;
-        font-size: 13px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 0;
-      }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-size: 14px;
+      font-weight: 500;
+      overflow: hidden;
+    }
 
-      .radio-item input[type="radio"]:checked + label {
-        background: #3498db;
-        border-color: #3498db;
-        color: white;
-      }
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #2c3e50;
+      background: #fff;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
 
-      .radio-item input[type="radio"]:focus + label {
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-      }
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
 
-      .radio-item label:hover {
-        border-color: #3498db;
-      }
+    input::placeholder {
+      color: #95a5a6;
+    }
 
-      .result-value {
-        text-align: center;
-        padding: 10px 0;
-      }
+    button {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
+    }
 
-      .result-label {
-        font-size: 16px;
-        color: #2c3e50;
-      }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+    }
 
-      .result-number {
-        font-size: 24px;
-        font-weight: 600;
-        color: #e67e22;
-        margin-left: 8px;
-      }
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(41, 128, 185, 0.2);
+    }
 
-      .input-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #e67e22;
+    }
 
-      .clear-input {
-        position: absolute;
-        right: 10px;
-        color: #95a5a6;
-        cursor: pointer;
-        padding: 4px;
-        font-size: 14px;
-        display: none;
-      }
+    #result h3 {
+      margin: 0 0 10px 0;
+      color: #2c3e50;
+      font-size: 16px;
+      text-align: center;
+    }
 
-      .input-wrapper:hover .clear-input {
-        display: block;
-      }
+    #result p {
+      margin: 0;
+      color: #34495e;
+      font-size: 14px;
+    }
 
-      .clear-input:hover {
-        color: #e74c3c;
-      }
+    .input-prefix {
+      position: relative;
+    }
 
-      .input-wrapper input {
-        padding-right: 30px;
-      }
-      .discount-rate {
-        margin-top: 8px;
-        font-size: 13px;
-        color: #7f8c8d;
-        padding-left: 2px;
-      }
+    .input-prefix input {
+      padding-left: 30px;
+    }
 
-      .discount-rate-label {
-        color: #95a5a6;
-      }
+    .input-prefix::before {
+      content: "¥";
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #95a5a6;
+      font-size: 14px;
+    }
 
-      .discount-rate-value {
-        color: #e67e22;
-        font-weight: 500;
-        margin-left: 4px;
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
+    .actual-price {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #7f8c8d;
+      padding-left: 2px;
+    }
 
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-      }
+    .actual-price-label {
+      color: #95a5a6;
+    }
 
-      ::-webkit-scrollbar-thumb {
-        background: #c1c1c1;
-        border-radius: 4px;
-      }
+    .actual-price-value {
+      color: #e67e22;
+      font-weight: 500;
+      margin-left: 4px;
+    }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background: #a8a8a8;
-      }
-      .gem-cost {
-        font-size: 13px;
-        font-weight: normal;
-        color: #7f8c8d;
-      }
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 5px;
+    }
 
-      .gem-cost-label {
-        color: #95a5a6;
-      }
+    .radio-item {
+      position: relative;
+    }
 
-      .gem-cost-value {
-        color: #e67e22;
-        font-weight: 500;
-        margin-left: 4px;
-      }
-      .market-link {
-        color: #34495e;
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
+    .radio-item input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
 
-      .market-link:hover {
-        color: #3498db;
-        text-decoration: underline;
-      }
-      .popular-packs {
-        margin-top: 20px;
-        padding-top: 15px;
-        border-top: 1px solid #e1e8ed;
-      }
+    .radio-item label {
+      display: block;
+      padding: 8px 12px;
+      background: #f8f9fa;
+      border: 2px solid #e1e8ed;
+      border-radius: 6px;
+      color: #2c3e50;
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0;
+    }
 
-      .section-title {
-        margin: 0 0 12px 0;
-        color: #2c3e50;
-        font-size: 16px;
-        font-weight: 500;
-      }
+    .radio-item input[type="radio"]:checked+label {
+      background: #3498db;
+      border-color: #3498db;
+      color: white;
+    }
 
-      .pack-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
+    .radio-item input[type="radio"]:focus+label {
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
 
-      .pack-link {
-        color: #34495e;
-        text-decoration: none;
-        font-size: 13px;
-        padding: 6px 10px;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-        background: #f8f9fa;
-        white-space: nowrap;
-      }
+    .radio-item label:hover {
+      border-color: #3498db;
+    }
 
-      .pack-link:hover {
-        color: #3498db;
-        background: #edf2f7;
-        text-decoration: underline;
-      }
+    .result-value {
+      text-align: center;
+      padding: 10px 0;
+    }
 
-      .strike-through {
-        text-decoration: line-through;
-        color: #e74c3c;
-      }
+    .result-label {
+      font-size: 16px;
+      color: #2c3e50;
+    }
 
-      .profit {
-        margin-top: 8px;
-        font-size: 13px;
-        color: #7f8c8d;
-      }
+    .result-number {
+      font-size: 24px;
+      font-weight: 600;
+      color: #e67e22;
+      margin-left: 8px;
+    }
 
-      .profit-label {
-        color: #95a5a6;
-      }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
 
-      .profit-value {
-        color: #e67e22;
-        font-weight: 500;
-        margin-left: 4px;
-      }
+    .clear-input {
+      position: absolute;
+      right: 10px;
+      color: #95a5a6;
+      cursor: pointer;
+      padding: 4px;
+      font-size: 14px;
+      display: none;
+    }
 
-      .discount-profit-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 8px;
-      }
+    .input-wrapper:hover .clear-input {
+      display: block;
+    }
 
-      .discount-rate,
-      .profit {
-        font-size: 13px;
-        color: #7f8c8d;
-      }
+    .clear-input:hover {
+      color: #e74c3c;
+    }
 
-      .discount-rate-label,
-      .profit-label {
-        color: #95a5a6;
-      }
+    .input-wrapper input {
+      padding-right: 30px;
+    }
 
-      .discount-rate-value,
-      .profit-value {
-        color: #e67e22;
-        font-weight: 500;
-        margin-left: 4px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2>卡包计算器</h2>
-      <div class="input-group">
-        <label>卡片数量</label>
-        <div class="radio-group">
-          <div class="radio-item">
-            <input type="radio" id="card5" name="cardCount" value="1200" />
-            <label for="card5">5张（1200）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card6" name="cardCount" value="1000" />
-            <label for="card6">6张（1000）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card7" name="cardCount" value="857" />
-            <label for="card7">7张（857）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card8" name="cardCount" value="750" />
-            <label for="card8">8张（750）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card9" name="cardCount" value="667" />
-            <label for="card9">9张（667）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card10" name="cardCount" value="600" />
-            <label for="card10">10张（600）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card11" name="cardCount" value="545" />
-            <label for="card11">11张（545）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card12" name="cardCount" value="500" />
-            <label for="card12">12张（500）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card13" name="cardCount" value="462" />
-            <label for="card13">13张（462）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card14" name="cardCount" value="429" />
-            <label for="card14">14张（429）</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="card15" name="cardCount" value="400" />
-            <label for="card15">15张（400）</label>
-          </div>
+    .discount-rate {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #7f8c8d;
+      padding-left: 2px;
+    }
+
+    .discount-rate-label {
+      color: #95a5a6;
+    }
+
+    .discount-rate-value {
+      color: #e67e22;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
+    .gem-cost {
+      font-size: 13px;
+      font-weight: normal;
+      color: #7f8c8d;
+    }
+
+    .gem-cost-label {
+      color: #95a5a6;
+    }
+
+    .gem-cost-value {
+      color: #e67e22;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .market-link {
+      color: #34495e;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .market-link:hover {
+      color: #3498db;
+      text-decoration: underline;
+    }
+
+    .popular-packs {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #e1e8ed;
+    }
+
+    .section-title {
+      margin: 0 0 12px 0;
+      color: #2c3e50;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .pack-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pack-link {
+      color: #34495e;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      background: #f8f9fa;
+      white-space: nowrap;
+    }
+
+    .pack-link:hover {
+      color: #3498db;
+      background: #edf2f7;
+      text-decoration: underline;
+    }
+
+    .strike-through {
+      text-decoration: line-through;
+      color: #e74c3c;
+    }
+
+    .profit {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    .profit-label {
+      color: #95a5a6;
+    }
+
+    .profit-value {
+      color: #e67e22;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .discount-profit-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .discount-rate,
+    .profit {
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    .discount-rate-label,
+    .profit-label {
+      color: #95a5a6;
+    }
+
+    .discount-rate-value,
+    .profit-value {
+      color: #e67e22;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>卡包计算器</h2>
+    <div class="input-group">
+      <label>卡片数量</label>
+      <div class="radio-group">
+        <div class="radio-item">
+          <input type="radio" id="card5" name="cardCount" value="1200" />
+          <label for="card5">5张（1200）</label>
         </div>
-      </div>
-      <div class="input-group">
-        <label for="gemPrice">
-          <a
-            href="https://steamcommunity.com/market/listings/753/753-Sack%20of%20Gems"
-            target="_blank"
-            class="market-link"
-            >宝石市场价格（元）</a
-          >
-          <span class="gem-cost">
-            <span class="gem-cost-label">宝石成本：</span>
-            <span id="gemCost" class="gem-cost-value">¥0.00元</span>
-          </span>
-        </label>
-        <div class="input-prefix input-wrapper">
-          <input
-            type="number"
-            id="gemPrice"
-            step="0.01"
-            placeholder="请输入宝石市场价格"
-          />
-          <select
-            id="gemPriceSelect"
-            style="
-              position: absolute;
-              right: 25px;
-              width: auto;
-              padding: 2px;
-              border: none;
-              background: transparent;
-              cursor: pointer;
-            "
-          >
-            <option value="">快速选择</option>
-          </select>
-          <span class="clear-input" data-for="gemPrice">✕</span>
+        <div class="radio-item">
+          <input type="radio" id="card6" name="cardCount" value="1000" />
+          <label for="card6">6张（1000）</label>
         </div>
-      </div>
-      <div class="input-group">
-        <label for="packPrice">
-          <a
-            href="https://steamcommunity.com/tradingcards/boostercreator"
-            target="_blank"
-            class="market-link"
-            >补充包市场价格（元）</a
-          >
-          <span class="actual-price">
-            <span class="actual-price-label">到手价格：</span>
-            <span id="actualPrice" class="actual-price-value">¥0.00元</span>
-          </span>
-        </label>
-        <div class="input-prefix input-wrapper">
-          <input
-            type="number"
-            id="packPrice"
-            step="0.01"
-            placeholder="请输入补充包市场价格"
-          />
-          <select
-            id="packPriceSelect"
-            style="
-              position: absolute;
-              right: 25px;
-              width: auto;
-              padding: 2px;
-              border: none;
-              background: transparent;
-              cursor: pointer;
-            "
-          >
-            <option value="">快速选择</option>
-          </select>
-          <span class="clear-input" data-for="packPrice">✕</span>
+        <div class="radio-item">
+          <input type="radio" id="card7" name="cardCount" value="857" />
+          <label for="card7">7张（857）</label>
         </div>
-        <div class="discount-profit-container">
-          <div class="discount-rate">
-            <span class="discount-rate-label">宝石折扣率：</span>
-            <span id="discountRate" class="discount-rate-value">0%</span>
-          </div>
-          <div class="profit">
-            <span class="profit-label">利润：</span>
-            <span id="profitValue" class="profit-value">¥0.00元</span>
-          </div>
+        <div class="radio-item">
+          <input type="radio" id="card8" name="cardCount" value="750" />
+          <label for="card8">8张（750）</label>
         </div>
-      </div>
-      <div id="result" style="display: none"></div>
-      <div class="popular-packs">
-        <h3 class="section-title">热门补充包</h3>
-        <div class="pack-links">
-          <a
-            href="https://steamcommunity.com/market/listings/753/1771300-Kingdom%20Come%3A%20Deliverance%20II%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-            >Kingdom Come: Deliverance II 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2909400-FINAL%20FANTASY%20VII%20REBIRTH%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-            >最终幻想7重生 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1643320-S.T.A.L.K.E.R.%202%3A%20Heart%20of%20Chornobyl%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-            >潜行者2：切尔诺贝利之心 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2384580-DYNASTY%20WARRIORS%3A%20ORIGINS%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-            >真三国无双起源 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1687950-Persona%205%20Royal%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Persona 5 Royal 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2358720-Black%20Myth%3A%20Wukong%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Black Myth: Wukong 补充包</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/2677660-Indiana%20Jones%20and%20the%20Great%20Circle%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >夺宝奇兵：古老之圈 补充包</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2420110-Horizon%20Forbidden%20West%E2%84%A2%20Complete%20Edition%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Horizon Forbidden West 补充包</a
-          >
-          <a
-          href="https://steamcommunity.com/market/listings/753/1340990-Rise of the Ronin Booster Pack"
-          target="_blank"
-          class="pack-link strike-through"
-          >浪人崛起Rise of the Ronin 补充包</a
-        >
+        <div class="radio-item">
+          <input type="radio" id="card9" name="cardCount" value="667" />
+          <label for="card9">9张（667）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card10" name="cardCount" value="600" />
+          <label for="card10">10张（600）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card11" name="cardCount" value="545" />
+          <label for="card11">11张（545）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card12" name="cardCount" value="500" />
+          <label for="card12">12张（500）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card13" name="cardCount" value="462" />
+          <label for="card13">13张（462）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card14" name="cardCount" value="429" />
+          <label for="card14">14张（429）</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="card15" name="cardCount" value="400" />
+          <label for="card15">15张（400）</label>
         </div>
       </div>
     </div>
-    <script src="popup.js"></script>
-  </body>
+    <div class="input-group">
+      <label for="gemPrice">
+        <a href="https://steamcommunity.com/market/listings/753/753-Sack%20of%20Gems" target="_blank"
+          class="market-link">宝石市场价格（元）</a>
+        <span class="gem-cost">
+          <span class="gem-cost-label">宝石成本：</span>
+          <span id="gemCost" class="gem-cost-value">¥0.00元</span>
+        </span>
+      </label>
+      <div class="input-prefix input-wrapper">
+        <input type="number" id="gemPrice" step="0.01" placeholder="请输入宝石市场价格" />
+        <select id="gemPriceSelect" style="
+              position: absolute;
+              right: 25px;
+              width: auto;
+              padding: 2px;
+              border: none;
+              background: transparent;
+              cursor: pointer;
+            ">
+          <option value="">快速选择</option>
+        </select>
+        <span class="clear-input" data-for="gemPrice">✕</span>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="packPrice">
+        <a href="https://steamcommunity.com/tradingcards/boostercreator" target="_blank"
+          class="market-link">补充包市场价格（元）</a>
+        <span class="actual-price">
+          <span class="actual-price-label">到手价格：</span>
+          <span id="actualPrice" class="actual-price-value">¥0.00元</span>
+        </span>
+      </label>
+      <div class="input-prefix input-wrapper">
+        <input type="number" id="packPrice" step="0.01" placeholder="请输入补充包市场价格" />
+        <select id="packPriceSelect" style="
+              position: absolute;
+              right: 25px;
+              width: auto;
+              padding: 2px;
+              border: none;
+              background: transparent;
+              cursor: pointer;
+            ">
+          <option value="">快速选择</option>
+        </select>
+        <span class="clear-input" data-for="packPrice">✕</span>
+      </div>
+      <div class="discount-profit-container">
+        <div class="discount-rate">
+          <span class="discount-rate-label">宝石折扣率：</span>
+          <span id="discountRate" class="discount-rate-value">0%</span>
+        </div>
+        <div class="profit">
+          <span class="profit-label">利润：</span>
+          <span id="profitValue" class="profit-value">¥0.00元</span>
+        </div>
+      </div>
+    </div>
+    <div id="result" style="display: none"></div>
+    <div class="popular-packs">
+      <h3 class="section-title">热门补充包</h3>
+      <div class="pack-links">
+        <a
+          href="https://steamcommunity.com/market/listings/753/2457220-Avowed%20Booster%20Pack"
+          target="_blank"
+          class="pack-link strike-through"
+          >Avowed 补充包</a
+        >
+        <a href="https://steamcommunity.com/market/listings/753/1771300-Kingdom%20Come%3A%20Deliverance%20II%20Booster%20Pack"
+          target="_blank" class="pack-link">Kingdom Come: Deliverance II 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/2909400-FINAL%20FANTASY%20VII%20REBIRTH%20Booster%20Pack"
+          target="_blank" class="pack-link">最终幻想7重生 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/1643320-S.T.A.L.K.E.R.%202%3A%20Heart%20of%20Chornobyl%20Booster%20Pack"
+          target="_blank" class="pack-link">潜行者2：切尔诺贝利之心 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/2384580-DYNASTY%20WARRIORS%3A%20ORIGINS%20Booster%20Pack"
+          target="_blank" class="pack-link">真三国无双起源 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/1687950-Persona%205%20Royal%20Booster%20Pack"
+          target="_blank" class="pack-link strike-through">Persona 5 Royal 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/2358720-Black%20Myth%3A%20Wukong%20Booster%20Pack"
+          target="_blank" class="pack-link strike-through">Black Myth: Wukong 补充包</a>
+
+        <a href="https://steamcommunity.com/market/listings/753/2677660-Indiana%20Jones%20and%20the%20Great%20Circle%20Booster%20Pack"
+          target="_blank" class="pack-link strike-through">夺宝奇兵：古老之圈 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/2420110-Horizon%20Forbidden%20West%E2%84%A2%20Complete%20Edition%20Booster%20Pack"
+          target="_blank" class="pack-link strike-through">Horizon Forbidden West 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/1340990-Rise%20of%20the%20Ronin%20Booster%20Pack" target="_blank"
+          class="pack-link strike-through">浪人崛起Rise of the Ronin 补充包</a>
+        <a href="https://steamcommunity.com/market/listings/753/2457220-Avowed%20Booster%20Pack" target="_blank"
+          class="pack-link strike-through">Avowed 补充包</a>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
 </html>
