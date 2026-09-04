@@ -212,6 +212,18 @@
         margin-left: 8px;
       }
 
+      .result-range {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #7f8c8d;
+        line-height: 1.5;
+      }
+
+      .result-range-number {
+        color: #e67e22;
+        font-weight: 600;
+      }
+
       .input-wrapper {
         position: relative;
         display: flex;
@@ -309,11 +321,52 @@
         border-top: 1px solid #e1e8ed;
       }
 
+      .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
       .section-title {
-        margin: 0 0 12px 0;
+        margin: 0;
         color: #2c3e50;
         font-size: 16px;
         font-weight: 500;
+      }
+
+      .add-pack-btn {
+        width: auto;
+        padding: 6px 12px;
+        font-size: 12px;
+        background: linear-gradient(135deg, #16a085, #1abc9c);
+        box-shadow: 0 2px 5px rgba(22, 160, 133, 0.2);
+        flex-shrink: 0;
+      }
+
+      .add-pack-btn:hover {
+        box-shadow: 0 4px 8px rgba(22, 160, 133, 0.3);
+      }
+
+      .add-pack-btn:disabled {
+        opacity: 0.65;
+        cursor: default;
+        transform: none;
+      }
+
+      .add-pack-status {
+        margin: 0 0 10px;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .add-pack-status.success {
+        color: #16a085;
+      }
+
+      .add-pack-status.error {
+        color: #e74c3c;
       }
 
       .pack-links {
@@ -556,7 +609,13 @@
       </div>
       <div id="result" style="display: none"></div>
       <div class="popular-packs">
-        <h3 class="section-title">热门补充包</h3>
+        <div class="section-header">
+          <h3 class="section-title">热门补充包</h3>
+          <button type="button" id="addPackBtn" class="add-pack-btn">
+            复制当前页
+          </button>
+        </div>
+        <p id="addPackStatus" class="add-pack-status" hidden></p>
         <div class="pack-links" id="packLinks"></div>
       </div>
     </div>
