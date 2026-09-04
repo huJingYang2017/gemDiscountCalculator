@@ -18,8 +18,57 @@ function initializePriceSelects() {
   }
 }
 
+function renderPackLinks(packs) {
+  const container = document.getElementById("packLinks");
+  if (!container) return;
+
+  container.replaceChildren();
+
+  packs.forEach((pack) => {
+    const item = document.createElement("div");
+    item.className = "pack-item";
+
+    const marketLink = document.createElement("a");
+    marketLink.href = pack.href;
+    marketLink.target = "_blank";
+    marketLink.rel = "noopener noreferrer";
+    marketLink.className = pack.deletedLine
+      ? "pack-link strike-through"
+      : "pack-link";
+    marketLink.textContent = `${pack.name} [${pack.cardNum}]`;
+    item.appendChild(marketLink);
+
+    if (pack.link) {
+      const craftLink = document.createElement("a");
+      craftLink.href = pack.link;
+      craftLink.target = "_blank";
+      craftLink.rel = "noopener noreferrer";
+      craftLink.className = "pack-craft-link";
+      craftLink.style.fontSize = "10px";
+      craftLink.textContent = "合成";
+      item.appendChild(craftLink);
+    }
+
+    container.appendChild(item);
+  });
+}
+
+async function loadPackLinks() {
+  try {
+    const response = await fetch("packs.json");
+    if (!response.ok) {
+      throw new Error(`加载 packs.json 失败: ${response.status}`);
+    }
+    const packs = await response.json();
+    renderPackLinks(packs);
+  } catch (error) {
+    console.error("加载热门补充包失败:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   initializePriceSelects();
+  loadPackLinks();
 
   // 监听所有输入变化
   const inputs = document.querySelectorAll('input[type="number"]');

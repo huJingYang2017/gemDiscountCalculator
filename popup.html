@@ -322,20 +322,43 @@
         gap: 8px;
       }
 
+      .pack-item {
+        display: inline-flex;
+        align-items: stretch;
+        overflow: hidden;
+        border-radius: 4px;
+        background: #f8f9fa;
+      }
+
       .pack-link {
         color: #34495e;
         text-decoration: none;
         font-size: 13px;
         padding: 6px 10px;
-        border-radius: 4px;
         transition: all 0.2s ease;
-        background: #f8f9fa;
         white-space: nowrap;
       }
 
       .pack-link:hover {
         color: #3498db;
         background: #edf2f7;
+        text-decoration: underline;
+      }
+
+      .pack-craft-link {
+        color: #16a085;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 6px 10px;
+        white-space: nowrap;
+        border-left: 1px solid #e1e8ed;
+        background: #e8f8f5;
+        transition: all 0.2s ease;
+      }
+
+      .pack-craft-link:hover {
+        color: #0e7c6b;
+        background: #d5f5ee;
         text-decoration: underline;
       }
 
@@ -534,255 +557,7 @@
       <div id="result" style="display: none"></div>
       <div class="popular-packs">
         <h3 class="section-title">热门补充包</h3>
-        <div class="pack-links">
-          <a
-            href="https://steamcommunity.com/market/listings/753/3751260-The%20Blood%20of%20Dawnwalker%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            黎明行者之血 [8]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2713000-Resonance%3A%20A%20Plague%20Tale%20Legacy%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            共鸣：瘟疫传说传承 [7]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/2825860-The%20Sinking%20City%202%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            沉没之城2 [15]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/3751950-Assassin's%20Creed%20Black%20Flag%20Resynced%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            刺客信条黑旗记忆重置 [13]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1297900-Gothic%201%20Remake%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            Gothic 1 Remake [7]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2215200-LEGO%C2%AE%20Batman%E2%84%A2%3A%20Legacy%20of%20the%20Dark%20Knight%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            乐高蝙蝠侠黑暗骑士之遗 [5]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2483190-Forza%20Horizon%206%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            极限竞速：地平线 6 [15]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2651280-Marvel%27s%20Spider-Man%202%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            Marvel's Spider-Man 2[14]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/1643320-S.T.A.L.K.E.R.%202%3A%20Heart%20of%20Chornobyl%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-            >潜行者2：切尔诺贝利之心 [15]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/3489700-Stellar%20Blade%E2%84%A2%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            剑星[8]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2627260-Ninja%20Gaiden%204%20Booster%20Pack"
-            target="_blank"
-            class="pack-link"
-          >
-            Ninja Gaiden 4 [8]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/3357650-PRAGMATA%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            PRAGMATA [5]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/3764200-Resident%20Evil%20Requiem%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            Resident Evil Requiem [8]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2416450-MOUSE%3A%20P.I.%20For%20Hire%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            神探杰克鼠 [12]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/2129530-REANIMAL%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            生灵重塑 [13]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2592160-Dispatch%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            Dispatch [10]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1903340-Clair%20Obscur%3A%20Expedition%2033%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            光与影：33号远征队[6]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2531310-The%20Last%20of%20Us%E2%84%A2%20Part%20II%20Remastered%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >The Last of Us™ Part II Remastered[10]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1030300-Hollow%20Knight%3A%20Silksong%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            Hollow Knight: Silksong [9]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/3159330-Assassin%27s%20Creed%20Shadows%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >刺客信条：影[9]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/3017860-DOOM%3A%20The%20Dark%20Ages%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            DOOM: The Dark Ages[10]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/2623190-The%20Elder%20Scrolls%20IV%3A%20Oblivion%20Remastered%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            The Elder Scrolls IV: Oblivion Remastered[10]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1771300-Kingdom%20Come%3A%20Deliverance%20II%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Kingdom Come: Deliverance II[10]</a
-          >
-
-          <a
-            href="https://steamcommunity.com/market/listings/753/2909400-FINAL%20FANTASY%20VII%20REBIRTH%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >最终幻想7重生 [8]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1687950-Persona%205%20Royal%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Persona 5 Royal[11]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/420530-OneShot%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >oneshot[5]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/3061810-Like%20a%20Dragon%3A%20Pirate%20Yakuza%20in%20Hawaii%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Like a Dragon: Pirate Yakuza in Hawaii[8]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1086940-Baldur%27s%20Gate%203%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            Baldur's Gate 3[11]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2384580-DYNASTY%20WARRIORS%3A%20ORIGINS%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >真三国无双起源 [15]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2677660-Indiana%20Jones%20and%20the%20Great%20Circle%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >夺宝奇兵：古老之圈 [6]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2001120-Split%20Fiction%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Split Fiction[9]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1340990-Rise%20of%20the%20Ronin%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >浪人崛起Rise of the Ronin [7]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2358720-Black%20Myth%3A%20Wukong%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-            >Black Myth: Wukong[12]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/2417610-METAL%20GEAR%20SOLID%20%CE%94%3A%20SNAKE%20EATER%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            合金装备[14]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/3681010-Nioh%203%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            仁王３[15]</a
-          >
-          <a
-            href="https://steamcommunity.com/market/listings/753/1449110-The%20Outer%20Worlds%202%20Booster%20Pack"
-            target="_blank"
-            class="pack-link strike-through"
-          >
-            The Outer Worlds 2 [6]</a
-          >
-        </div>
+        <div class="pack-links" id="packLinks"></div>
       </div>
     </div>
     <script src="popup.js"></script>
