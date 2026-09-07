@@ -540,9 +540,7 @@ async function loadPageMarketQuote() {
     const matched = packsCache.find(
       (pack) => getListingAppId(pack.href) === appId
     );
-    if (matched) {
-      applyCardNum(matched.cardNum);
-    }
+    applyCardNum(matched?.cardNum || 6);
 
     const injected = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
